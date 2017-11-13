@@ -10,8 +10,14 @@ def root():
     d = json.loads(info)
     img = d['hdurl']
     explanation = d['explanation']
-    return render_template("root.html", img = img, explanation = explanation)
+    u1 = urllib2.urlopen("http://www.theaudiodb.com/api/v1/json/1/search.php?s=coldplay")
+    info1 = u1.read()
+    d1 = json.loads(info1)
+    #print d['explanation']
+    artistInfo = d1['artists'][0]['strBiographyEN']
+    return render_template("root.html", img = img, explanation = explanation, artistInfo = artistInfo, artist = 'coldplay')
 
+    
 if __name__ == "__main__":
     my_app.debug = True
     my_app.run()
